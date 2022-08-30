@@ -7,6 +7,14 @@ We need you to implement a solution to display price tickers data on the UI in r
 
 Price data is available from a locally running service (see information below). Any additional visualisations to indicate how prices have changed would be a plus. Testing is also an important part to this exercise.
 
+Done:
+- application is connected to the locally running service
+- application renders price changes for some tickers in real time
+- layout is responsive
+- there is possibility to specify interval time by user
+- there is visual effect on price cell
+- there is cart which represents the dynamic of some ticker's price
+
 Requirements:
 - application should connect to the locally running service
 - application should render price changes for some tickers in real time
