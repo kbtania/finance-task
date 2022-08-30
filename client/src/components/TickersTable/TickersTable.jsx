@@ -1,23 +1,40 @@
 import React, {useEffect, useState} from 'react';
-import {io} from "socket.io-client";
+import { useDispatch, useSelector } from 'react-redux';
+
 import {Table} from "react-bootstrap";
 import styles from './TickersTable.module.css';
-import TickerRow from "../TickerRow/TickerRow";
 import {socket} from "../../service/socket";
 
+import TickerRow from "../TickerRow/TickerRow";
+import IntervalForm from "../IntervalForm/IntervalForm";
+import {tickersSelector} from "../../store/tickers/selector";
+import {getTickersError, setTickers} from "../../store/tickers/actionCreators";
+
+
+
+
 const TickersTable = () => {
-    const [currentTickers, setCurrentTickers] = useState([]);
+    //const [currentTickers, setCurrentTickers] = useState([]);
+    const { currentTickers, loading, error } = useSelector(tickersSelector);
+    const dispatch = useDispatch();
     useEffect(() => {
         socket.emit('start');
-        socket.on('ticker', (items) => [setCurrentTickers(items)]);
+       // socket.on('ticker', (items) => [setCurrentTickers(items)]);
+        socket.on('ticker', (items) => dispatch(setTickers(items)));
+        socket.on('disconnect', ()=>dispatch(getTickersError()));
         return () => {
-            socket.removeAllListeners();
+            socket.off('ticker');
+            socket.off('disconnect');
         };
     }, [])
+
+    // -------------------------
+
     return (
         <div>
             <h1 className={styles.title}>Price Tickers</h1>
             <hr />
+            <IntervalForm/>
             <Table responsive className={styles.table}>
                 <thead>
                 <tr>

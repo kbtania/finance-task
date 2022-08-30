@@ -4,8 +4,9 @@ const http = require('http');
 const io = require('socket.io');
 const cors = require('cors');
 
-const FETCH_INTERVAL = 5000;
+let FETCH_INTERVAL = 5000;
 const PORT = process.env.PORT || 4000;
+let timer;
 
 const tickers = [
   'AAPL', // Apple
@@ -24,6 +25,12 @@ function randomValue(min = 0, max = 1, precision = 0) {
 function utcDate() {
   const now = new Date();
   return new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+}
+
+function userInterval(socket) {
+  timer = setInterval(function () {
+    getQuotes(socket);
+  }, FETCH_INTERVAL);
 }
 
 function getQuotes(socket) {
@@ -47,12 +54,15 @@ function trackTickers(socket) {
   getQuotes(socket);
 
   // every N seconds
-  const timer = setInterval(function() {
-    getQuotes(socket);
-  }, FETCH_INTERVAL);
+  userInterval(socket);
 
   socket.on('disconnect', function() {
     clearInterval(timer);
+  })
+  .on("changeInterval", (time) => {
+    clearInterval(timer);
+    FETCH_INTERVAL = time;
+    userInterval(socket);
   });
 }
 

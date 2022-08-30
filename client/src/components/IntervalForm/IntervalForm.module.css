@@ -1,0 +1,11 @@
+.form {
+    width: 80%;
+    margin: 0 auto;
+}
+.inputGroup {
+    display: flex;
+}
+.label {
+    font-size: 22px;
+}
+
