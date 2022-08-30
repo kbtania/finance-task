@@ -1,0 +1,30 @@
+.positive {
+    background-color: #B1D7B4;
+    padding: 5px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.negative {
+    background-color: #FAD4D4;
+    padding: 5px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.arrowUp {
+    color: green;
+    margin-right: 5px;
+}
+.arrowDown {
+    color: red;
+    margin-right: 5px;
+}
+
+.ticker {
+    background-color: #2C3333;
+    color: #E7F6F2;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+}

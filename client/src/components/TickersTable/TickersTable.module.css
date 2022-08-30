@@ -1,0 +1,22 @@
+.title {
+    text-align: center;
+    color: #2C3333;
+}
+.table {
+    width: 90% !important;
+    margin: 5% auto;
+}
+.rowTicker {
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px solid #E0DECA;
+    font-weight: bold;
+}
+.time {
+    margin: 20px auto;
+    width: 90%;
+}
+.timeInput {
+    width: 50%;
+}
