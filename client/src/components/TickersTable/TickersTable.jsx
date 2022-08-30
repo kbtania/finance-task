@@ -8,6 +8,7 @@ import {socket} from "../../service/socket";
 import TickerRow from "../TickerRow/TickerRow";
 import IntervalForm from "../IntervalForm/IntervalForm";
 import Chart from "../Chart/Chart";
+import Error from "../Error/Error";
 
 import {tickersSelector} from "../../store/tickers/selector";
 import {getTickersError, setTickers} from "../../store/tickers/actionCreators";
@@ -30,33 +31,38 @@ const TickersTable = () => {
 
     return (
         <div>
-            <IntervalForm/>
-            <hr />
-            <Table responsive className={styles.table}>
-                <thead>
-                <tr>
-                    <th>Ticker</th>
-                    <th>Exchange</th>
-                    <th>Price</th>
-                    <th>Change</th>
-                    <th>Change <br/>Percent</th>
-                    <th>Dividend</th>
-                    <th>Yield</th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    currentTickers.map(item=>{
-                        return (
-                            <TickerRow
-                                key={item.ticker} tickerItem={item}/>
-                        )
-                    })
-                }
-                </tbody>
-            </Table>
-            <hr />
-            <Chart />
+            {error
+                ? <Error /> :
+                <>
+                    <IntervalForm/>
+                    <hr />
+                    <Table responsive className={styles.table}>
+                        <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Exchange</th>
+                            <th>Price</th>
+                            <th>Change</th>
+                            <th>Change <br/>Percent</th>
+                            <th>Dividend</th>
+                            <th>Yield</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            currentTickers.map(item=>{
+                                return (
+                                    <TickerRow
+                                        key={item.ticker} tickerItem={item}/>
+                                )
+                            })
+                        }
+                        </tbody>
+                    </Table>
+                    <hr />
+                    <Chart />
+                </>
+            }
         </div>
     );
 };
