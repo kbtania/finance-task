@@ -31,7 +31,7 @@ const TickerRow = ({tickerItem}) => {
         dispatch(getChosenTicker(ticker));
     }
     return (
-        <tr onClick={handleChoice} className={chosenTicker === ticker ? styles.selected: styles.row}>
+        <tr onClick={handleChoice} className="tickerRow" className={chosenTicker === ticker ? styles.selected: styles.row}>
             <td><div className={styles.ticker}>{tickerItem.ticker}</div></td>
             <td><div>{tickerItem.exchange}</div></td>
             <td>
