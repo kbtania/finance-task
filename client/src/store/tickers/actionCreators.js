@@ -1,14 +1,7 @@
 import {
-    GET_TICKERS_REQUESTED,
     GET_TICKERS_CURRENT,
     GET_TICKERS_PREVIOUS,
     GET_TICKERS_ERROR} from './actionTypes';
-
-export const getTickersRequested = () => {
-    return {
-        type: GET_TICKERS_REQUESTED,
-    };
-};
 
 const getTickersActual = (tickers) => {
     return {

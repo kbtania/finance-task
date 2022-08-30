@@ -1,20 +1,34 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import styles from './TickerRow.module.css';
+import {useSelector} from "react-redux";
+import {tickersSelector} from "../../store/tickers/selector";
 
 const TickerRow = ({tickerItem}) => {
-    const {
-        ticker,
-        price,
-        change_percent,
-    } = tickerItem;
+    const { ticker, price} = tickerItem;
+    const { previousTickers } = useSelector(tickersSelector);
+    const [trendPrice, setTrendPrice] = useState(null);
+
+    useEffect(() => {
+        previousTickers.map((previousData) => {
+            if (previousData.ticker === ticker &&
+                Number(previousData.price) > Number(price)) {
+                setTrendPrice(false);
+            } if (previousData.ticker === ticker &&
+                Number(previousData.price) < Number(price)) {
+                setTrendPrice(true);
+            }
+            return previousData;
+        });
+    }, [previousTickers, price, ticker]);
     return (
         <tr>
             <td><div className={styles.ticker}>{tickerItem.ticker}</div></td>
             <td><div>{tickerItem.exchange}</div></td>
             <td>
-                <div >
-                   {tickerItem.price}
+                <div className={trendPrice ? styles.positive : styles.negative}>
+                    {trendPrice ? <span className={styles.arrowUp}>&#9650;</span> : <span className={styles.arrowDown}>&#9660;</span>}
+                    {tickerItem.price}
                 </div></td>
             <td><div>{tickerItem.change}</div></td>
             <td>

@@ -11,10 +11,7 @@ import {tickersSelector} from "../../store/tickers/selector";
 import {getTickersError, setTickers} from "../../store/tickers/actionCreators";
 
 
-
-
 const TickersTable = () => {
-    //const [currentTickers, setCurrentTickers] = useState([]);
     const { currentTickers, loading, error } = useSelector(tickersSelector);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -28,7 +25,6 @@ const TickersTable = () => {
         };
     }, [])
 
-    // -------------------------
 
     return (
         <div>
