@@ -13,7 +13,7 @@ Done:
 - layout is responsive
 - there is possibility to specify interval time by user
 - there is visual effect on price cell
-- there is cart which represents the dynamic of some ticker's price
+- there is chart which represents the dynamic of some ticker's price
 
 Requirements:
 - application should connect to the locally running service
