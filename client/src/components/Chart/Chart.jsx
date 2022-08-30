@@ -32,7 +32,7 @@ const Chart = () => {
     }, [chosenTicker]);
     return (
         <div className={styles.chart}>
-            <h2>Chart for {chosenTicker} ticker</h2>
+            <h2>Chart of prices for {chosenTicker} ticker</h2>
             <LineChart width={400} height={300} data={selectedTicker.flat()}>
                 <XAxis dataKey="last_trade_time" />
                 <YAxis />
