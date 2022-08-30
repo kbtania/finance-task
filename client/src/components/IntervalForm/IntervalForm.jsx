@@ -26,7 +26,7 @@ const IntervalForm = () => {
     return (
     <Form className={styles.form}>
         <Form.Group className="mb-3">
-            <Form.Label className={styles.label}>&#9203; Set Update Interval</Form.Label>
+            <Form.Label className={styles.label}>&#9203; Set Interval</Form.Label>
             {
                 wrongNumber &&
                 <Alert key="danger" variant="danger">

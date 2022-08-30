@@ -18,26 +18,24 @@ export function tickersReducer(state = initialState, action) {
             return {
                 ...state,
                 currentTickers: action.payload,
-                error: false,
             };
         }
         case GET_TICKERS_PREVIOUS: {
             return {
                 ...state,
                 previousTickers: action.payload,
-                error: false,
             };
         }
         case GET_TICKERS_ERROR: {
             return {
                 ...state,
-                error: true,
+                error: action.payload,
             };
         }
         case GET_CHOSEN_TICKER: {
             return {
                 ...state,
-                chosenTicker: action.payload
+                chosenTicker: action.payload,
 
             }
         }

@@ -18,9 +18,10 @@ const getTickersPrevious = (tickers) => {
     };
 };
 
-export const getTickersError = () => {
+export const getTickersError = (errorValue) => {
     return {
         type: GET_TICKERS_ERROR,
+        payload: errorValue
     };
 };
 

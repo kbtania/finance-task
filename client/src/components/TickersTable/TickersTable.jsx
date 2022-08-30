@@ -7,19 +7,19 @@ import {socket} from "../../service/socket";
 
 import TickerRow from "../TickerRow/TickerRow";
 import IntervalForm from "../IntervalForm/IntervalForm";
-import {tickersSelector} from "../../store/tickers/selector";
-import {getTickersError, setTickers} from "../../store/tickers/actionCreators";
 import Chart from "../Chart/Chart";
 
+import {tickersSelector} from "../../store/tickers/selector";
+import {getTickersError, setTickers} from "../../store/tickers/actionCreators";
 
 const TickersTable = () => {
     const { currentTickers, error } = useSelector(tickersSelector);
-    const [selectedRow, setSelectedRow] = useState(null);
+
     const dispatch = useDispatch();
     useEffect(() => {
         socket.emit('start');
         socket.on('ticker', (items) => dispatch(setTickers(items)));
-        socket.on('disconnect', ()=>dispatch(getTickersError()));
+        socket.on('disconnect', ()=>{dispatch(getTickersError(true)); console.log('error = ', error)});
         return () => {
             socket.off('ticker');
             socket.off('disconnect');
@@ -30,9 +30,8 @@ const TickersTable = () => {
 
     return (
         <div>
-            <h1 className={styles.title}>Price Tickers</h1>
-            <hr />
             <IntervalForm/>
+            <hr />
             <Table responsive className={styles.table}>
                 <thead>
                 <tr>
@@ -57,7 +56,7 @@ const TickersTable = () => {
                 </tbody>
             </Table>
             <hr />
-            <Chart ticker={selectedRow} />
+            <Chart />
         </div>
     );
 };
