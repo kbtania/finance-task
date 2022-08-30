@@ -1,7 +1,8 @@
 import {
     GET_TICKERS_CURRENT,
     GET_TICKERS_PREVIOUS,
-    GET_TICKERS_ERROR} from './actionTypes';
+    GET_TICKERS_ERROR, GET_CHOSEN_TICKER
+} from './actionTypes';
 
 const getTickersActual = (tickers) => {
     return {
@@ -20,6 +21,13 @@ const getTickersPrevious = (tickers) => {
 export const getTickersError = () => {
     return {
         type: GET_TICKERS_ERROR,
+    };
+};
+
+export const getChosenTicker = (ticker) => {
+    return {
+        type: GET_CHOSEN_TICKER,
+        payload: ticker
     };
 };
 

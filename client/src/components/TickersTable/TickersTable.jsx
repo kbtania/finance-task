@@ -9,14 +9,15 @@ import TickerRow from "../TickerRow/TickerRow";
 import IntervalForm from "../IntervalForm/IntervalForm";
 import {tickersSelector} from "../../store/tickers/selector";
 import {getTickersError, setTickers} from "../../store/tickers/actionCreators";
+import Chart from "../Chart/Chart";
 
 
 const TickersTable = () => {
-    const { currentTickers, loading, error } = useSelector(tickersSelector);
+    const { currentTickers, error } = useSelector(tickersSelector);
+    const [selectedRow, setSelectedRow] = useState(null);
     const dispatch = useDispatch();
     useEffect(() => {
         socket.emit('start');
-       // socket.on('ticker', (items) => [setCurrentTickers(items)]);
         socket.on('ticker', (items) => dispatch(setTickers(items)));
         socket.on('disconnect', ()=>dispatch(getTickersError()));
         return () => {
@@ -24,6 +25,7 @@ const TickersTable = () => {
             socket.off('disconnect');
         };
     }, [])
+
 
 
     return (
@@ -47,12 +49,15 @@ const TickersTable = () => {
                 {
                     currentTickers.map(item=>{
                         return (
-                            <TickerRow key={item.price} tickerItem={item}/>
+                            <TickerRow
+                                key={item.ticker} tickerItem={item}/>
                         )
                     })
                 }
                 </tbody>
             </Table>
+            <hr />
+            <Chart ticker={selectedRow} />
         </div>
     );
 };

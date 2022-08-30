@@ -1,13 +1,17 @@
 import React, {useEffect, useState} from 'react';
 
 import styles from './TickerRow.module.css';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {tickersSelector} from "../../store/tickers/selector";
+import {getChosenTicker, getTickersError} from "../../store/tickers/actionCreators";
 
 const TickerRow = ({tickerItem}) => {
     const { ticker, price} = tickerItem;
-    const { previousTickers } = useSelector(tickersSelector);
     const [trendPrice, setTrendPrice] = useState(null);
+    const { previousTickers, chosenTicker } = useSelector(tickersSelector);
+
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         previousTickers.map((previousData) => {
@@ -21,8 +25,13 @@ const TickerRow = ({tickerItem}) => {
             return previousData;
         });
     }, [previousTickers, price, ticker]);
+
+    function handleChoice() {
+        dispatch(getTickersError)
+        dispatch(getChosenTicker(ticker));
+    }
     return (
-        <tr>
+        <tr onClick={handleChoice} className={chosenTicker === ticker ? styles.selected: styles.row}>
             <td><div className={styles.ticker}>{tickerItem.ticker}</div></td>
             <td><div>{tickerItem.exchange}</div></td>
             <td>

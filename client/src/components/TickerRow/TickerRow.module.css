@@ -1,3 +1,10 @@
+.row {
+    cursor: pointer;
+}
+.row:hover {
+    background-color: #EEEEEE;
+    transition: 0.5s ease;
+}
 .positive {
     background-color: #B1D7B4;
     padding: 5px;
@@ -27,4 +34,9 @@
     text-align: center;
     padding: 5px;
     border-radius: 10px;
+}
+
+.selected {
+    cursor: pointer;
+    background-color: #EEEEEE;
 }

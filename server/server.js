@@ -45,8 +45,36 @@ function getQuotes(socket) {
     yield: randomValue(0, 2, 2),
     last_trade_time: utcDate(),
   }));
-
+  let aapl_tickers = quotes.filter(t => t.ticker === tickers[0]);
+  let googl_tickers = quotes.filter(t => t.ticker === tickers[1]);
+  let msft_tickers = quotes.filter(t => t.ticker === tickers[2]);
+  let amzn_tickers = quotes.filter(t => t.ticker === tickers[3]);
+  let fb_tickers = quotes.filter(t => t.ticker === tickers[4]);
+  let tsla_tickers = quotes.filter(t => t.ticker === tickers[5]);
   socket.emit('ticker', quotes);
+  socket.emit('AAPL', aapl_tickers);
+  socket.emit('GOOGL', googl_tickers);
+  socket.emit('MSFT', msft_tickers);
+  socket.emit('AMZN', amzn_tickers);
+  socket.emit('FB', fb_tickers);
+  socket.emit('TSLA', tsla_tickers);
+
+
+}
+
+function getAapl(socket) {
+  const quotes = tickers.map(ticker => ({
+    ticker,
+    exchange: 'NASDAQ',
+    price: randomValue(100, 300, 2),
+    change: randomValue(0, 200, 2),
+    change_percent: randomValue(0, 1, 2),
+    dividend: randomValue(0, 1, 2),
+    yield: randomValue(0, 2, 2),
+    last_trade_time: utcDate(),
+  }));
+  // let res = quotes.filter(q=>q.ticker === 'AAPL');
+  // socket.emit('getAapl');
 }
 
 function trackTickers(socket) {

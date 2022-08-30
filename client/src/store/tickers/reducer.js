@@ -1,12 +1,14 @@
 import {
     GET_TICKERS_CURRENT,
     GET_TICKERS_PREVIOUS,
-    GET_TICKERS_ERROR} from './actionTypes';
+    GET_TICKERS_ERROR, GET_CHOSEN_TICKER
+} from './actionTypes';
 
 const initialState = {
     currentTickers: [],
     previousTickers: [],
     error: false,
+    chosenTicker: 'AAPL'
 };
 
 
@@ -31,6 +33,13 @@ export function tickersReducer(state = initialState, action) {
                 ...state,
                 error: true,
             };
+        }
+        case GET_CHOSEN_TICKER: {
+            return {
+                ...state,
+                chosenTicker: action.payload
+
+            }
         }
         default: {
             return state;
