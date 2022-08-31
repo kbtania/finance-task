@@ -6,7 +6,7 @@ const Footer = () => {
         <div className={styles.footer}>
             <p className={styles.text}>Price Ticker</p>
             <p className={styles.text}>Test Task for Incode Group</p>
-            <p className={styles.text}>Ⓒ{new Date().getFullYear()}
+            <p data-testid="footer-year" className={styles.text}>Ⓒ{new Date().getFullYear()}
                 <a className={styles.link} href="https://github.com/kbtania"> Tetiana Kobal</a></p>
         </div>
     );
