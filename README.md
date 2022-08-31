@@ -14,6 +14,7 @@ Done:
 - there is possibility to specify interval time by user
 - there is visual effect on price cell
 - there is chart which represents the dynamic of some ticker's price
+- basic tests
 
 Requirements:
 - application should connect to the locally running service
